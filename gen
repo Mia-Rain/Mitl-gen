@@ -1,0 +1,62 @@
+#!/bin/sh
+style="<style>
+body {
+  font-family: monospace; /* better to use in system monospace */
+  padding: 100px;
+  font-size: 16px;
+  background: black;
+}
+</style>"
+IFS=""
+in=$(while read -r p || [ $p ]; do
+  printf '%s\n' "$p"
+done) # set in to STDIN as we need it several times
+l=0; n=0; while read -r p || [ $p ]; do 
+    : $((l+=${#p})) # add length of lines together
+    : $((n+=1))     # count lines
+done << EOF
+$in
+EOF
+l=$((l/n +30)) # find mean length size # should be good enough
+[ $l -lt 45 ] && l=48 # make sure it at least matches wit the header
+# too long looks odd as does too short # hopefully the mean is a good middle point
+# we don't need float math since sh just floors the number
+## below is some jank to yank the project name
+printf '<head>
+<link rel="icon" href="/favicon.png">
+'
+i=0; while read -r p || [ $p ]; do
+  [ "$i" -eq 1 ] && {
+      p="${p#\#?}"; p=${p% *} # yank out any trailing/leading spaces
+      name="${p}"; echo "<title>~git/${p}</title>"; 
+      break
+    }
+  : $((i+=1)) 
+done << EOF
+$in
+EOF
+
+printf '</head>
+<body class="vsc-initialized"><font color="#fffff">
+<pre style="background-color: black">    | ~ Licensed under Unlicense ~ Set it Free.
+    | ~ git clone ssh://g.posix.gay/%s --recursive
+' "$name" # print inital setup
+# next gen header based on mean
+printf '\-\-\-\-+'; # no new line # printf gives bs -- error
+n=0; until [ "$n" -eq "$l" ]; do 
+  printf '-'
+  : $((n+=1))
+done; echo # new line
+while read -r p || [ $p ]; do
+  printf '    | %s\n' "$p"
+done << EOF
+$in
+EOF
+printf '    |
+    |
+    |
+</pre>
+</font>
+'
+echo "$style"
+echo '</body>'

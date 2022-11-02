@@ -1,0 +1,7 @@
+---
+Mitl-gen (MiaHTML-gen)
+-- Generator for static sites for my git projects
+---- Makes use of my README style + base website layout
+---- /WILL NOT/ work correctly with MarkDown README's
+  >> Replaces the need for a git UI via https
+---
