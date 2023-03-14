@@ -24,6 +24,7 @@ l=$((l/n +30)) # find mean length size # should be good enough
 ## below is some jank to yank the project name
 printf '<head>
 <link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="style.css">
 '
 i=0; while read -r p || [ $p ]; do
   [ "$i" -eq 1 ] && {
@@ -42,7 +43,7 @@ printf '</head>
     | ~ git clone ssh://g.posix.gay/%s --recursive
 ' "$name" # print inital setup
 # next gen header based on mean
-printf '\-\-\-\-+'; # no new line # printf gives bs -- error
+printf '%s+' "----"; # no new line # printf gives bs -- error
 n=0; until [ "$n" -eq "$l" ]; do 
   printf '-'
   : $((n+=1))
