@@ -16,7 +16,7 @@ l=$((l/n +30)) # find mean length size # should be good enough
 ## below is some jank to yank the project name
 printf '<head>
 <link rel="icon" href="/favicon.png">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/style.css">
 '
 i=0; while read -r p || [ $p ]; do
   [ "$i" -eq 1 ] && {
