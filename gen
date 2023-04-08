@@ -30,7 +30,9 @@ $in
 EOF
 
 printf '</head>
-<body class="vsc-initialized"><font color="#fffff">
+<body class="vsc-initialized">
+<div>
+<font color="#fffff">
 <pre style="background-color: black">    | ~ Licensed under Unlicense ~ Set it Free.
     | ~ git clone ssh://g.posix.gay/%s --recursive
 ' "$name" # print inital setup
@@ -50,5 +52,6 @@ printf '    |
     |
 </pre>
 </font>
+</div>
 '
 echo '</body>'
