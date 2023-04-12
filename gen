@@ -1,5 +1,10 @@
 #!/bin/sh
 IFS=""
+[ "$1" ] && . $1 # use $1 to change configuration slightly
+[ "$domain" ] || domain="g.posix.gay"
+[ "$license" ] || license="Licensed under Unlicense ~ Set it Free."
+[ "$stack" ] || stack="ssh"
+[ "$root" ] || root="~git"
 in=$(while read -r p || [ $p ]; do
   printf '%s\n' "$p"
 done) # set in to STDIN as we need it several times
@@ -12,7 +17,6 @@ EOF
 l=$((l/n +30)) # find mean length size # should be good enough
 [ $l -lt 45 ] && l=48 # make sure it at least matches wit the header
 # too long looks odd as does too short # hopefully the mean is a good middle point
-# we don't need float math since sh just floors the number
 ## below is some jank to yank the project name
 printf '<head>
 <link rel="icon" href="/favicon.png">
@@ -21,21 +25,20 @@ printf '<head>
 i=0; while read -r p || [ $p ]; do
   [ "$i" -eq 1 ] && {
       p="${p#\#?}"; p=${p% *} # yank out any trailing/leading spaces
-      name="${p}"; echo "<title>~git/${p}</title>"; 
+      name="${p}"; echo "<title>${root}/${title:-"${p}"}</title>"; 
       break
     }
   : $((i+=1)) 
 done << EOF
 $in
 EOF
-
 printf '</head>
 <body class="vsc-initialized">
-<div>
+<div class="%s">
 <font color="#fffff">
-<pre style="background-color: black">    | ~ Licensed under Unlicense ~ Set it Free.
-    | ~ git clone ssh://g.posix.gay/%s --recursive
-' "$name" # print inital setup
+<pre style="background-color: black">    | ~ %s
+    | ~ git clone %s://%s/%s --recursive
+' "${div_class:-div}" "$license" "$stack" "$domain" "$name" # print inital setup
 # next gen header based on mean
 printf '%s+' "----"; # no new line # printf gives bs -- error
 n=0; until [ "$n" -eq "$l" ]; do 
@@ -54,4 +57,4 @@ printf '    |
 </font>
 </div>
 '
-echo '</body>'
+[ "$addon" ] || echo '</body>'

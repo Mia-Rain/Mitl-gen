@@ -3,5 +3,30 @@ Mitl-gen (MiaHTML-gen)
 -- Generator for static sites for my git projects
 ---- Makes use of my README style + base website layout
 ---- /WILL NOT/ work correctly with MarkDown README's
+---- see g.posix.gay/readme-syntax/README.md
   >> Replaces the need for a git UI via https
+---
+Usage
+-- supply README via STDIN
+---- outputs code to be used in index.html
+-- css is pulled from ${site-root}/style.css
+-- a cron job or custom script should be used
+---
+Custom data
+-- use $1 to set custom data
+---- set $title to change title element
+  >> defaults to data on line 2 before any whitespace
+---- set $domain for personal use
+  >> defaults to g.posix.gay
+---- set $stack for custom network stack usage
+  >> defaults to ssh
+---- set $root for custom root path
+  >> defaults to ~git
+  >>>> used with $title for "${root}/${title}"
+---- set $license to use a custom license marker
+  >> defaults to "Licensed under Unlicense ~ Set it Free."
+---- set $div_class for a custom class on the parent div
+  >> defaults to "div"
+  >>>> see ./gen or review generated html
+---- set $addon to disable an ending body element
 ---
