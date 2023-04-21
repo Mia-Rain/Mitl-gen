@@ -16,6 +16,7 @@ Custom data
 -- use $1 to set custom data
 ---- set $title to change title element
   >> defaults to data on line 2 before any whitespace
+---- set $css to add a secondary custom css file
 ---- set $domain for personal use
   >> defaults to g.posix.gay
 ---- set $stack for custom network stack usage

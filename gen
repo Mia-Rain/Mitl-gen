@@ -24,6 +24,7 @@ printf '<head>
 <link rel="icon" href="/favicon.png">
 <link rel="stylesheet" href="/style.css">
 '
+[ "$css" ] && printf '<link rel="stylesheet" href="%s">\n' "$css"
 i=0; [ "$name" ] || while read -r p || [ $p ]; do
   [ "$i" -eq 1 ] && {
       p="${p#\#?}"; p=${p% *} # yank out any trailing/leading spaces
