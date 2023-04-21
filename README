@@ -25,6 +25,9 @@ Custom data
   >>>> used with $title for "${root}/${title}"
 ---- set $license to use a custom license marker
   >> defaults to "Licensed under Unlicense ~ Set it Free."
+---- set $name to use a custom clone name
+  >> defaults to data on line 2 before any whitespace
+  >>>> used via ${stack}://${domain}/${name}
 ---- set $div_class for a custom class on the parent div
   >> defaults to "div"
   >>>> see ./gen or review generated html
