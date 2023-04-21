@@ -58,3 +58,4 @@ printf '    |
 </div>
 '
 [ "$addon" ] || echo '</body>'
+[ "$addon" -a "$ascript"] && ${ascript}

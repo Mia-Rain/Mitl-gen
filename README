@@ -29,4 +29,7 @@ Custom data
   >> defaults to "div"
   >>>> see ./gen or review generated html
 ---- set $addon to disable an ending body element
+---- set $ascript to execute a command after ./gen has run
+  >> requires $addon to be set
+  >>>> make sure to close the body element
 ---
