@@ -1,6 +1,6 @@
 #!/bin/sh
 IFS=""
-[ "$domain" ] || domain="g.posix.gay"
+[ "$domain" ] || domain="g.transcendent.ink"
 [ "$license" ] || license="Licensed under Unlicense ~ Set it Free."
 [ "$stack" ] || stack="ssh"
 [ "$root" ] || root="~git"
