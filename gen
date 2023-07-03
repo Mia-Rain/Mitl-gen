@@ -1,9 +1,12 @@
 #!/bin/sh
 IFS=""
+space=" "
 [ "$domain" ] || domain="g.transcendent.ink"
 [ "$license" ] || license="Licensed under Unlicense ~ Set it Free."
 [ "$stack" ] || stack="ssh"
 [ "$root" ] || root="~git"
+[ "$foot" ] && addon="1"
+[ "$hyperlink" ] || hyperlink="://"
 [ "$1" ] && . $1  
 # load custom data last so variables may be unset
 # YMMV
@@ -42,19 +45,42 @@ printf '</head>
 <font color="#fffff">
 <pre style="background-color: black">    | %s
     | ~ git clone %s://%s/%s --recursive
-' "${div_class:-div}" "${license:+~ $license}" "$stack" "$domain" "$name" # print inital setup
+' "${div_class:-div}" "${license:+~ $license}" "$stack" "$domain" "$name" # print initial setup
 # next gen header based on mean
 printf '%s+' "----"; # no new line # printf gives bs -- error
 n=0; until [ "$n" -eq "$l" ]; do 
   printf '-'
   : $((n+=1))
 done; echo # new line
+link_num=1
 while read -r p || [ $p ]; do
-  printf '    | %s\n' "$p"
+  p=" $p"
+  # injection helps with hyperlink support
+  [ "${p##*"${hyperlink}"}" != "$p" -a "${linkfile}" -a -e "${linkfile:-./link-list}" ] && { 
+    # detected hyperlink prepend
+    while read -r c || [ $c ]; do
+      [ "${c%%:*}" -eq "$link_num" ] && {
+        clink="${c#*:}"
+        break
+      }
+    done < "$linkfile"
+    for i in ${p}; do
+      case $i in
+        (*"$hyperlink"*)
+          p="${p%% "${hyperlink}"*} <a href=\""$clink"\">${i#*${hyperlink}}</a>${p##*${space}${hyperlink}*}"
+          unset clink
+          break
+          ;;
+      esac
+    done
+    : $((link_num+=1))
+  }
+  # hyperlink support
+  printf '    |%s\n' "$p"
 done << EOF
 $in
 EOF
-printf '    |
+[ "$foot" ] || printf '    |
     |
     |
 </pre>
