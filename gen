@@ -67,7 +67,7 @@ while read -r p || [ $p ]; do
     for i in ${p}; do
       case $i in
         (*"$hyperlink"*)
-          p="${p%% "${hyperlink}"*} <a href=\""$clink"\">${i#*${hyperlink}}</a>${p##*${space}${hyperlink}*}"
+          [ "$clink" ] && p="${p%% "${hyperlink}"*} <a href=\""$clink"\">${i#*${hyperlink}}</a>${p##*${space}${hyperlink}*}"
           unset clink
           break
           ;;
