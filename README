@@ -1,51 +1,12 @@
 ---
-Mitl-gen (MiaHTML-gen)
--- Generator for static sites for my git projects
----- Makes use of my README style + base website layout
----- /WILL NOT/ work correctly with MarkDown README's
----- see g.posix.gay/readme-syntax/README.md
-  >> Replaces the need for a git UI via https
+Mitl-gen
+-- static site gen for g.transcendent.ink
+---- uses custom README syntax
+---- see below
 ---
-Usage
--- supply README via STDIN
----- outputs code to be used in index.html
--- css is pulled from ${site-root}/style.css
--- a cron job or custom script should be used
+
+
 ---
-Hyperlink support
--- hyperlinks are handled by setting $hyperlink
----- and prefixing where hyperlinks should be with it
-  >> defaults to ://
--- hyperlink handles links using $linkfile
----- file should have a numbered list of where each link points
----- ie: 1:https://example.com
----- link #1 is used on the 1st found match of $hyperlink
----- then #2 will be used on 2nd, etc
------- WARNING: Hyperlink support is likely to break very easily
----
-Custom data
--- set $1 to config to set variables
----- set $title to change title element
-  >> defaults to data on line 2 before any whitespace
----- set $css to add a secondary custom css file
----- set $domain for personal use
-  >> defaults to g.posix.gay
----- set $stack for custom network stack usage
-  >> defaults to ssh
----- set $root for custom root path
-  >> defaults to ~git
-  >>>> used with $title for "${root}/${title}"
----- set $license to use a custom license marker
-  >> defaults to "Licensed under Unlicense ~ Set it Free."
----- set $name to use a custom clone name
-  >> defaults to data on line 2 before any whitespace
-  >>>> used via ${stack}://${domain}/${name}
----- set $div_class for a custom class on the parent div
-  >> defaults to "div"
-  >>>> see ./gen or review generated html
----- set $foot to disable the footer; this will force $addon as true
----- set $addon to disable an ending body element
----- set $ascript to execute a command after ./gen has run
-  >> requires $addon to be set
-  >>>> make sure to close the body element and/or add a footer
+READ ://readme-syntax/README.md
+-- READ ://Mitl-gen/DOCS
 ---
