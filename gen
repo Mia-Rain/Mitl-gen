@@ -50,8 +50,8 @@ echo "<title>${root}/${title:-"${name}"}</title>"
 printf '</head>
 <body class="vsc-initialized">
 <div class="%s">
-<font color="#fffff">
-<pre style="background-color: black">
+<font>
+<pre>
 <center>
  ' "${div_class:-div}" # print initial setup
 # next gen header based on mean
